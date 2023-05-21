@@ -13,13 +13,16 @@ Link para acesso: http://quiz-lotr.emilio.pedrollo.nom.br/
 
 #### Desenvolvedor(es)
 
-Emílio B. Pedrollo
-Miguel M. da Silva
+Emílio B. Pedrollo;
+
+Miguel M. da Silva;
 
 #### Tecnologias
 
 Linguagens: PHP, Javascript, HTML e CSS;
+
 Banco: POSTGRES;
+
 Framework: Laravel.
 
 #### Ambiente de desenvolvimento
