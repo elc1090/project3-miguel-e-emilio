@@ -23,7 +23,9 @@ Linguagens: PHP, Javascript, HTML e CSS;
 
 Banco: POSTGRES;
 
-Framework: Laravel.
+Framework: Laravel;
+
+Hosting: AWS e nginx.
 
 #### Ambiente de desenvolvimento
 
