@@ -1,12 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
-import ApplicationMark from '@/Components/ApplicationMark.vue';
-import Banner from '@/Components/Banner.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import ApplicationMark from '../Components/ApplicationMark.vue';
+import Banner from '../Components/Banner.vue';
+import Dropdown from '../Components/Dropdown.vue';
+import DropdownLink from '../Components/DropdownLink.vue';
+import NavLink from '../Components/NavLink.vue';
+import ResponsiveNavLink from '../Components/ResponsiveNavLink.vue';
+import Logo from "../Components/Logo.vue";
 
 defineProps({
     title: String,
@@ -34,24 +35,56 @@ const logout = () => {
         <Banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+            <nav id="navigator" class="relative bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+                <div id="banner" class="w-full h-16 absolute">
+                  <div class="absolute flex overflow-hidden w-full h-16">
+                      <div class="relative flex-1">
+                          <img class="w-full via-transparent relative object-cover"
+                              style="height: 80px"
+                              alt="The One Quiz"
+                              src="/logo.svg"
+                              height="80px">
+                      </div>
+                  </div>
+                  <div class="absolute flex overflow-hidden w-full h-16 items-center justify-center">
+                      <div class="relative flex-1">
+                        <div class="relative flex items-center justify-center">
+                          <h2 id="page-title" class="inline-block sm:text-6xl text-4xl" style="font-family: 'Ringbearer', sans-serif">Who said it?</h2>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationMark class="block h-9 w-auto" />
-                                </Link>
-                            </div>
+<!--                            <div class="shrink-0 flex items-center">-->
+<!--                                <Link :href="route('dashboard')">-->
+<!--                                    <ApplicationMark class="block h-9 w-auto" />-->
+<!--                                </Link>-->
+<!--                            </div>-->
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                            </div>
+                          <div class="hidden space-x-8 sm:-my-px sm:flex pt-4 mr-1">
+                            <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
+                                     class="dark:bg-gray-800 px-3 rounded-t-md ">
+                              Dashboard
+                            </NavLink>
+                          </div>
+                          <div class="hidden space-x-8 sm:-my-px sm:flex pt-4 mr-1">
+                            <NavLink :href="route('play')" :active="route().current('play')"
+                                     class="dark:bg-gray-800 px-3 rounded-t-md ">
+                              Play
+                            </NavLink>
+                          </div>
+                          <div class="hidden space-x-8 sm:-my-px sm:flex pt-4">
+                            <NavLink :href="route('rankings')" :active="route().current('rankings')"
+                                     class="dark:bg-gray-800 px-3 rounded-t-md ">
+                              Rank
+                            </NavLink>
+                          </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -163,7 +196,7 @@ const logout = () => {
 
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
-                            <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out" @click="showingNavigationDropdown = ! showingNavigationDropdown">
+                            <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 focus:outline-none bg-gray-100 dark:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out" @click="showingNavigationDropdown = ! showingNavigationDropdown">
                                 <svg
                                     class="h-6 w-6"
                                     stroke="currentColor"
@@ -276,7 +309,7 @@ const logout = () => {
             </nav>
 
             <!-- Page Heading -->
-            <header v-if="$slots.header" class="bg-white dark:bg-gray-800 shadow">
+            <header id="header" v-if="$slots.header" class="bg-white dark:bg-gray-800 shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>

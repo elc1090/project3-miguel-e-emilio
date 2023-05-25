@@ -5,3 +5,24 @@
 [x-cloak] {
     display: none;
 }
+
+@font-face {
+    font-family: 'Ringbearer';
+    src: url('assets/fonts/ringbearer.medium.eot'); /* IE9 Compat Modes */
+    src: url('assets/fonts/ringbearer.medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('assets/fonts/ringbearer.medium.woff') format('woff'), /* Modern Browsers */
+    url('assets/fonts/ringbearer.medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('assets/fonts/ringbearer.medium.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+#banner {
+    background-image: linear-gradient(-1deg, rgba(78, 39, 40, 0.9), rgba(226, 88, 34, 0.9));
+}
+
+h2#page-title {
+    font-family: Ringbearer,sans-serif !important;
+    padding: 0 10px;
+    color: #FBC841;
+    text-shadow: -1px -2px 6px #FBDF7A, 1px 1px 3px #472b19, 0 0 10px rgba(0,0,0,1), 0 0 2px red;
+}
+
