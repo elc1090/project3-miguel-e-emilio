@@ -18,8 +18,10 @@ class Controller extends BaseController
 
         $user = $request->user();
 
+        $seed = $request->get("seed","123");
+
         $question = json_decode(
-            json: Http::get('https://real-heavy-paneer.glitch.me/question?seed=123')->body(),
+            json: Http::get("https://real-heavy-paneer.glitch.me/question?seed=$seed")->body(),
             associative: true
         );
 

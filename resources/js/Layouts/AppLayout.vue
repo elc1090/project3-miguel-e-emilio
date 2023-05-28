@@ -69,19 +69,19 @@ const logout = () => {
                             <!-- Navigation Links -->
                           <div class="hidden space-x-8 sm:-my-px sm:flex pt-4 mr-1">
                             <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
-                                     class="dark:bg-gray-800 px-3 rounded-t-md ">
+                                     class="bg-gray-200 dark:bg-gray-800 px-3 rounded-t-md ">
                               Dashboard
                             </NavLink>
                           </div>
                           <div class="hidden space-x-8 sm:-my-px sm:flex pt-4 mr-1">
                             <NavLink :href="route('play')" :active="route().current('play')"
-                                     class="dark:bg-gray-800 px-3 rounded-t-md ">
+                                     class="bg-gray-200 dark:bg-gray-800 px-3 rounded-t-md ">
                               Play
                             </NavLink>
                           </div>
                           <div class="hidden space-x-8 sm:-my-px sm:flex pt-4">
                             <NavLink :href="route('rankings')" :active="route().current('rankings')"
-                                     class="dark:bg-gray-800 px-3 rounded-t-md ">
+                                     class="bg-gray-200 dark:bg-gray-800 px-3 rounded-t-md ">
                               Rank
                             </NavLink>
                           </div>
@@ -228,6 +228,18 @@ const logout = () => {
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('play')" :active="route().current('play')">
+                            Play
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('rankings')" :active="route().current('rankings')">
+                            Rankings
                         </ResponsiveNavLink>
                     </div>
 
