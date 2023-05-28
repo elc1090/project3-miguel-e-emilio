@@ -1,5 +1,9 @@
 import './bootstrap';
-import '../css/app.css';
+import '../sass/app.scss';
+import.meta.glob([
+    '../fonts/**',
+    '../icons/**',
+])
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
