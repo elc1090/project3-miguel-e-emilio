@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
@@ -70,15 +71,19 @@ class Controller extends BaseController
 
         $team = $user->currentTeam;
 
+        /** @var Collection $teamUsers */
         $teamUsers = $team->allUsers()
+            ->filter(fn($user) => $user->answeredQuestions->isNotEmpty())
             ->load('answeredQuestions')
             ->sortByDesc('score')
             ->values();
 
+        /** @var Collection $teams */
         $teams = Team::with([
             'users.answeredQuestions',
             'owner.answeredQuestions',
         ])->get()
+            ->filter(fn($team) => $team->answeredQuestions->isNotEmpty())
             ->append('answeredQuestions')
             ->sortByDesc('score')
             ->values();
