@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
+    public function answeredQuestions(): HasMany
+    {
+        return $this->hasMany(Question::class)->whereNotNull('correct');
+    }
+
     public function openQuestion(): HasOne
     {
         return $this->hasOne(Question::class)->whereNull('correct');
@@ -80,9 +85,11 @@ class User extends Authenticatable
     protected function score(): Attribute {
         return Attribute::make(
             get: function(): ?int {
-                $questions = $this->questions()
-                    ->whereNotNull('correct')
+
+                $questions = $this
+                    ->answeredQuestions
                     ->pluck('correct');
+
                 $total = $questions->count();
 
                 return $total === 0 ? null : $questions

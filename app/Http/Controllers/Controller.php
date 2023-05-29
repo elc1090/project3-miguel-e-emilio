@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreateNewQuestion;
 use App\Models\Question;
+use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -61,5 +62,30 @@ class Controller extends BaseController
         }
 
         return redirect('play');
+    }
+
+    public function rank (Request $request) {
+
+        $user = $request->user();
+
+        $team = $user->currentTeam;
+
+        $teamUsers = $team->allUsers()
+            ->load('answeredQuestions')
+            ->sortByDesc('score')
+            ->values();
+
+        $teams = Team::with([
+            'users.answeredQuestions',
+            'owner.answeredQuestions',
+        ])->get()
+            ->append('answeredQuestions')
+            ->sortByDesc('score')
+            ->values();
+
+        return Inertia::render('Rank',[
+            'team_users' => $teamUsers,
+            'teams' => $teams ?? []
+        ]);
     }
 }

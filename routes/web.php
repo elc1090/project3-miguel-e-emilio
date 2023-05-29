@@ -42,7 +42,5 @@ Route::middleware([
     Route::get('/play', [Controller::class,'play'])->name('play');
     Route::get('/answer', [Controller::class,'answer'])->name('answer');
 
-    Route::get('/rankings', function () {
-        return Inertia::render('Rank');
-    })->name('rankings');
+    Route::get('/rankings', [Controller::class,'rank'])->name('rankings');
 });

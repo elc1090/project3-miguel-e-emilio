@@ -46,18 +46,23 @@ class Team extends JetstreamTeam
     ];
 
     protected $appends = ['score'];
+
+
+    public function answeredQuestions(): Attribute {
+        return Attribute::make(
+            get: fn() => $this
+                ->allUsers()
+                ->load('answeredQuestions')
+                ->map->answeredQuestions
+                ->flatten()
+        );
+    }
+
     public function score(): Attribute {
         return Attribute::make(
             get: function(): ?int {
-
-                $questions = $this->users()->with([
-                    'questions' => fn(HasMany $query) => $query->whereNotNull('correct')
-                ])->get()->merge([$this->owner->load([
-                    'questions' => fn(HasMany $query) => $query->whereNotNull('correct')
-                ])])->map->questions->flatten();
-
+                $questions = $this->answeredQuestions;
                 $total = $questions->count();
-
                 return $total === 0 ? null : $questions
                         ->filter(fn($question) => $question->correct)
                         ->count() / $total * 100;
