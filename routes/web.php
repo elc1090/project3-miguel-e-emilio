@@ -40,6 +40,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/play', [Controller::class,'play'])->name('play');
+    Route::get('/answer', [Controller::class,'answer'])->name('answer');
 
     Route::get('/rankings', function () {
         return Inertia::render('Rank');
