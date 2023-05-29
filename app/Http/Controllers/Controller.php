@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateNewQuestion;
+use App\Models\Question;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -16,10 +18,10 @@ class Controller extends BaseController
     public function play (Request $request) {
         $user = $request->user();
 
-        $seed = $request->get("seed","123");
+        $question = $user->openQuestion ?? (new CreateNewQuestion)->create($user);
 
         $question = json_decode(
-            json: Http::get("https://real-heavy-paneer.glitch.me/question?seed=$seed")->body(),
+            json: Http::get("https://real-heavy-paneer.glitch.me/question?seed=$question->seed")->body(),
             associative: true
         );
 
@@ -46,7 +48,14 @@ class Controller extends BaseController
             associative: true
         );
 
+        Question::unguard();
+        $user->openQuestion->update([
+            'correct' => $verify['result'] === 'right'
+        ]);
+        Question::reguard();
+
         \Session::flash('flash.banner', $verify['result']);
+
         if ($verify['result'] === 'wrong') {
             \Session::flash('flash.bannerStyle', 'danger');
         }

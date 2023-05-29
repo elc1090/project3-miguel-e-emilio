@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -41,4 +44,25 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    protected $appends = ['score'];
+    public function score(): Attribute {
+        return Attribute::make(
+            get: function(): ?int {
+
+                $questions = $this->users()->with([
+                    'questions' => fn(HasMany $query) => $query->whereNotNull('correct')
+                ])->get()->merge([$this->owner->load([
+                    'questions' => fn(HasMany $query) => $query->whereNotNull('correct')
+                ])])->map->questions->flatten();
+
+                $total = $questions->count();
+
+                return $total === 0 ? null : $questions
+                        ->filter(fn($question) => $question->correct)
+                        ->count() / $total * 100;
+
+            }
+        );
+    }
 }

@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -65,10 +67,28 @@ class User extends Authenticatable
         'profile_photo_url', 'score'
     ];
 
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Question::class);
+    }
+
+    public function openQuestion(): HasOne
+    {
+        return $this->hasOne(Question::class)->whereNull('correct');
+    }
 
     protected function score(): Attribute {
         return Attribute::make(
-            get: fn(): ?int => 54,
+            get: function(): ?int {
+                $questions = $this->questions()
+                    ->whereNotNull('correct')
+                    ->pluck('correct');
+                $total = $questions->count();
+
+                return $total === 0 ? null : $questions
+                    ->filter(fn($question) => $question)
+                    ->count() / $total * 100;
+            }
         );
     }
 }
