@@ -85,7 +85,7 @@ defineProps({
                                         <tbody>
                                         <tr v-for="(team, index) in teams" class="dark:border-gray-700 border-b"
                                             :class="team.id === $page.props.auth.user.current_team_id ? [
-                                                        'dark:bg-amber-300', 'text-red-700'
+                                                        'bg-amber-300', 'text-red-700'
                                                     ] : [
                                                         'bg-white', 'even:bg-gray-50', 'dark:bg-gray-900', 'even:dark:bg-gray-800'
                                                     ]">
