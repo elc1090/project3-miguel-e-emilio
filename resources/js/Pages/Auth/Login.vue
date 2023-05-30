@@ -30,21 +30,21 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Entrar"/>
+    <Head title="Log in" />
 
     <AuthenticationCard>
         <template #logo>
-            <AuthenticationCardLogo/>
+            <AuthenticationCardLogo />
         </template>
 
         <template #after-card>
             <div class="mt-2">
                 <span class="text-gray-600 text-sm inline-flex mr-1">
-                    Ainda não é registrado?
+                    Does not have an account yet?
                 </span>
                 <Link v-if="canResetPassword" :href="route('register')"
                       class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                    Registre-se
+                    Create account
                 </Link>
             </div>
         </template>
@@ -55,7 +55,7 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="E-mail"/>
+                <InputLabel for="email" value="Email" />
                 <TextInput
                     id="email"
                     v-model="form.email"
@@ -65,11 +65,11 @@ const submit = () => {
                     autofocus
                     autocomplete="username"
                 />
-                <InputError class="mt-2" :message="form.errors.email"/>
+                <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Senha"/>
+                <InputLabel for="password" value="Password" />
                 <TextInput
                     id="password"
                     v-model="form.password"
@@ -78,24 +78,23 @@ const submit = () => {
                     required
                     autocomplete="current-password"
                 />
-                <InputError class="mt-2" :message="form.errors.password"/>
+                <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="block mt-4">
                 <label class="flex items-center">
-                    <Checkbox v-model:checked="form.remember" name="remember"/>
-                    <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Lembre-se</span>
+                    <Checkbox v-model:checked="form.remember" name="remember" />
+                    <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
                 </label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')"
-                      class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                    Esqueceu sua senha?
+                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                    Forgot your password?
                 </Link>
 
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Entrar
+                    Log in
                 </PrimaryButton>
             </div>
         </form>
