@@ -17,7 +17,7 @@ Quiz sobre LoTR.
 
 #### Deploy
 
-Link para acesso: http://quiz-lotr.emilio.pedrollo.nom.br/
+Link para acesso: https://quiz-lotr.emilio.pedrollo.nom.br/
 
 Referencia: https://elc1090.github.io/project2-emiliopedrollo/
 
