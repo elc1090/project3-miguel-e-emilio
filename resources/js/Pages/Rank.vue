@@ -42,7 +42,7 @@ defineProps({
                                         <tbody>
                                             <tr v-for="(user, index) in team_users" class="dark:border-gray-700 border-b"
                                                 :class="user.id === $page.props.auth.user.id ? [
-                                                        'dark:bg-amber-300', 'text-red-700'
+                                                        'bg-amber-300', 'text-red-700'
                                                     ] : [
                                                         'bg-white', 'even:bg-gray-50', 'dark:bg-gray-900', 'even:dark:bg-gray-800'
                                                     ]">
